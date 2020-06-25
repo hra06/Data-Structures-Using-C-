@@ -1,17 +1,18 @@
-template<typename T>
+emplate<typename T>
 class BinaryTreeNode{
-    T data;
-    BinaryTreeNode* left;
-    BinaryTreeNode* right;
+	public:
+		T data;
+		BinaryTreeNode* left;
+		BinaryTreeNode* right;
 
-    BinaryTreeNode(T data){
-        this->data = data;
-        left = NULL;
-        right = NULL;
-    }
+		BinaryTreeNode(T data){
+			this->data = data;
+			left = NULL;
+			right = NULL;
+		}
 
-    ~BinaryTreeNode(){
-        delete left;
-        delete right;
-    }
-}
+		~BinaryTreeNode(){
+			delete left;
+			delete right;
+		}
+};
