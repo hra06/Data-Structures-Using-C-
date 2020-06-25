@@ -10,4 +10,13 @@ class TreeNode{
         TreeNode(T data){
             this->data = data;
         }
+
+        ~TreeNode(){
+            for(int i=0; i<(root->children.size()); i++){
+		        delete children[i];
+	        }
+        }
 };
+
+
+// we can simply use( delete root;) after making destructor

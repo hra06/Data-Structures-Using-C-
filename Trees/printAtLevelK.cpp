@@ -59,11 +59,23 @@ void printAtLevelK(TreeNode<int>* root, int k){
 	}
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
+
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();	
 	cout<<"Enter the level/depth you want to print: ";
 	int k;
 	cin>>k;
 	printAtLevelK(root,k);
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }
+
+

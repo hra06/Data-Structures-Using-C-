@@ -61,6 +61,13 @@ int countLeafNode(TreeNode<int>* root){
 	return ans;
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();	
 	cout<<"Total Leaf Nodes are: "<<countLeafNode(root);
@@ -68,5 +75,8 @@ int main() {
 	//cin>>k;
 	//printAtLevelK(root,k);
 	
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }
+

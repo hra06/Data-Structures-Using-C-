@@ -53,10 +53,19 @@ int sumOfNodes(TreeNode<int>* root){
 	return ans;
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
 
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 	
 	cout<<"The Sum of All Nodes in tree are: "<<sumOfNodes(root)<<endl;
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }
+

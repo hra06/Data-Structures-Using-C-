@@ -47,6 +47,12 @@ void printTree(TreeNode<int>* root){
 	}
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
 
 int main() {
 	// TreeNode<int>* root = new TreeNode<int>(1);
@@ -57,8 +63,7 @@ int main() {
 	TreeNode<int>* root = takeInput();
 	printTree(root);
 
-	// TODO--->Delete the dynamic allocated tree
-
-	
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }

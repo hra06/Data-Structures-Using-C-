@@ -63,6 +63,14 @@ void postOrder(TreeNode<int>* root){
 	cout<<(root->data)<<" ";
 }
 
+
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 	cout<<"PreOrder Travesral is: "<<endl;
@@ -71,5 +79,8 @@ int main() {
 	cout<<"PostOrder Travesral is: "<<endl;
 	postOrder(root);
 	cout<<endl;
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }
+

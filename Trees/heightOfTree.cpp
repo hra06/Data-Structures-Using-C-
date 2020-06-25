@@ -62,10 +62,19 @@ int height(TreeNode<int>* root) {
 
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
 
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 	int heightofTree = height(root);
 	cout<<"The height of Tree is: "<<heightofTree<<endl;
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }
+

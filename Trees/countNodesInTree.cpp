@@ -56,10 +56,18 @@ int numNodes(TreeNode<int>* root){
 	return ans;
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
 
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 	
 	cout<<"The Nodes in tree are: "<<numNodes(root)<<endl;
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }

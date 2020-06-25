@@ -81,6 +81,14 @@ void printTreeLevelWise(TreeNode<int>* root){
 	}
 }
 
+
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
+
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 	printTree(root);
@@ -93,5 +101,7 @@ int main() {
 	cout<<endl;
 	cout<<endl;
 	printTreeLevelWise(root);
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }

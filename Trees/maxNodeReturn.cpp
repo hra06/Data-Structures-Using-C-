@@ -59,10 +59,19 @@ TreeNode<int>* maxDataNode(TreeNode<int>* root) {
 	return ans;
 }
 
+void deleteTree(TreeNode<int>* root){
+	for(int i=0; i<(root->children.size()); i++){
+		deleteTree(root->children[i]);
+	}
+	delete root;
+}
 
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
 	TreeNode<int>* maxNode = maxDataNode(root);
 	cout<<"The maxNode in tree is: "<<maxNode->data<<endl;
+	// delete the dynamically allocated memory
+	deleteTree(root);
 	return 0;
 }
+
