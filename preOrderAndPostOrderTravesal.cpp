@@ -16,7 +16,6 @@ class TreeNode{
 };
 
 
-
 TreeNode<int>* takeInputLevelWise(){
 	int rootData;
 	cout<<"Enter root Data: "<<endl;
@@ -44,22 +43,33 @@ TreeNode<int>* takeInputLevelWise(){
 	return root;
 }
 
-
-int numNodes(TreeNode<int>* root){
+void preOrder(TreeNode<int>* root){
 	if(root==NULL){
-		return 0;
+		return;
 	}
-	int ans =1;
-	for(int i=0;i<(root->children.size());i++){
-		ans+=numNodes(root->children[i]);
+	cout<<(root->data)<<" ";
+	for(int i=0; i<(root->children.size()); i++){
+		preOrder(root->children[i]);
 	}
-	return ans;
 }
 
+void postOrder(TreeNode<int>* root){
+	if(root==NULL){
+		return;
+	}	
+	for(int i=0; i<(root->children.size()); i++){
+		postOrder(root->children[i]);
+	}
+	cout<<(root->data)<<" ";
+}
 
 int main() {
 	TreeNode<int>* root = takeInputLevelWise();
-	
-	cout<<"The Nodes in tree are: "<<numNodes(root)<<endl;
+	cout<<"PreOrder Travesral is: "<<endl;
+	preOrder(root);
+	cout<<endl;
+	cout<<"PostOrder Travesral is: "<<endl;
+	postOrder(root);
+	cout<<endl;
 	return 0;
 }
