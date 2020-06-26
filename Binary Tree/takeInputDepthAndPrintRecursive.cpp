@@ -54,5 +54,6 @@ BInaryTreeNode<int>* takeInput(){
 int main(){
 	BInaryTreeNode<int>* root = takeInput();
 	printBinaryTree(root);
+    delete root;
 	return 0;
 }
