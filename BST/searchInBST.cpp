@@ -79,3 +79,5 @@ int main(){
 	delete root;
 	return 0;
 }
+
+// We are expecting the input to be in BST mode
