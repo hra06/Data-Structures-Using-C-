@@ -1,4 +1,4 @@
-emplate<typename T>
+template<typename T>
 class BinaryTreeNode{
 	public:
 		T data;
