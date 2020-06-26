@@ -54,36 +54,22 @@ BInaryTreeNode<int>* takeInputLevelWise(){
 	return root;
 }
 
-bool isNodePresent(BInaryTreeNode<int>* root, int x) {
-  
-  if(root==NULL){
-		return false;
+void mirrorBinaryTree(BInaryTreeNode<int>* root) {
+if(root == NULL){
+		return;
 	}
-	if(root->data == x) {
-		return true;
-	}
-	bool left = isNodePresent(root->left, x);
-	bool right = isNodePresent(root->right,x);
-	if( left || right){
-		return true;
-	}else{
-		return false;
-	}
+	mirrorBinaryTree(root->left);
+	mirrorBinaryTree(root->right);
+	
+	BInaryTreeNode<int>* temp = root->left;
+	root->left = root->right;
+	root->right = temp;
 }
 
-
 int main(){
-	cout<<"enter the node you want to find in tree:";
-	int x;
-	cin>>x;
 	BInaryTreeNode<int>* root = takeInputLevelWise();
 	cout<<endl;
-	if(isNodePresent(root, x)) {
-        cout << "true";
-    }
-    else {
-        cout << "false";
-    }
+	mirrorBinaryTree(root);
     cout<<endl;
 	delete root;
 	return 0;
