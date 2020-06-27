@@ -105,9 +105,63 @@ bool isBST(BinaryTreeNode<int>* root){
 	return output; 
 }
 
+
+// Approach 2 O(n)
+class IsBSTReturn{
+	public:
+		bool isBST;
+		int minimum;
+		int maximum;
+};
+
+IsBSTReturn isBST2(BinaryTreeNode<int>* root){
+	if(root==NULL){
+		IsBSTReturn output;
+		output.isBST = true;
+		output.minimum = INT_MAX;
+		output.maximum = INT_MIN;
+		return output;
+	}
+	
+	IsBSTReturn leftBST  = isBST2(root->left);
+	IsBSTReturn rightBST = isBST2(root->right);
+	
+	IsBSTReturn output;
+	output.minimum = min(root->data , min(leftBST.minimum,rightBST.minimum));
+	output.maximum = max(root->data, max(rightBST.maximum, rightBST.maximum));
+	output.isBST = (root->data  >leftBST.maximum) &&(root->data <= rightBST.minimum) && leftBST.isBST && rightBST.isBST;
+	return output;
+}
+
+
+// Approach 3 Mine Fav O(n)
+bool isBST3(BinaryTreeNode<int>* root, int max = INT_MAX,  int min = INT_MIN){
+	if(root==NULL){
+		return true;
+	}
+	if(root->data < min || root->data > max){
+		return false;
+	}
+	bool isLeftOK = isBST3(root->left, root->data-1, min);
+	bool isRightOK = isBST3(root->right, max, root->data);
+	return (isLeftOK && isRightOK);
+}
+
 int main(){
-    BinaryTreeNode<int>* root = takeInputLevelWise();	
+     BinaryTreeNode<int>* root = takeInputLevelWise();	
 	if(isBST(root)) {
+        cout << "true" << endl;
+    }
+    else {
+        cout << "false" << endl;
+    }
+    if(isBST2(root).isBST) {
+        cout << "true" << endl;
+    }
+    else {
+        cout << "false" << endl;
+    }
+    if(isBST3(root)) {
         cout << "true" << endl;
     }
     else {
