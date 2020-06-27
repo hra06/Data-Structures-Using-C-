@@ -1,4 +1,5 @@
 #include<iostream>
+#include<climits>
 #include<queue>
 using namespace std;
 
@@ -54,26 +55,54 @@ BinaryTreeNode<int>* takeInputLevelWise(){
 	return root;
 }
 
-bool isBST(BinaryTreeNode<int>* root){
+
+
+// in Some cases it will not going to work because this only check with adjcent childrens but we wanr leftMax & rightMin to verify if it's BST or not... :)
+// bool isBST(BinaryTreeNode<int>* root){
+// 	if(root==NULL){
+// 		return true;
+// 	}
+//     bool y,z;
+//     if(root->left ==NULL){
+//         y= true;
+//     }else if(root->left->data <= root->data){
+// 		y = isBST(root->left);
+// 	}else{
+// 		y= false;
+// 	}
+//     if(root->right==NULL){
+//         z = true;
+//     }else if(root->right->data >= root->data){
+// 		z = isBST(root->right);
+// 	}else{
+// 		z = false;
+// 	}
+//     return (y && z);
+// }
+
+// This is the right way to check whether the given tree is BST or not but it is not time efficient
+int maximum(BinaryTreeNode<int>* root){
 	if(root==NULL){
+		return INT_MIN;
+	}
+	return max(root->data, max(maximum(root->left), maximum(root->right)));
+}
+
+int minimum(BinaryTreeNode<int>* root){
+	if(root==NULL){
+		return INT_MAX;
+	}
+	return min(root->data, min(minimum(root->left) , minimum(root->right)));
+}
+
+bool isBST(BinaryTreeNode<int>* root){
+	if(root ==NULL){
 		return true;
 	}
-    bool y,z;
-    if(root->left ==NULL){
-        y= true;
-    }else if(root->left->data <= root->data){
-		y = isBST(root->left);
-	}else{
-		y= false;
-	}
-    if(root->right==NULL){
-        z = true;
-    }else if(root->right->data >= root->data){
-		z = isBST(root->right);
-	}else{
-		z = false;
-	}
-    return (y && z);
+	int leftMax = maximum(root->left);
+	int rightMin = minimum(root->right);
+	bool output = (isBST(root->left) && isBST(root->right)  && (root->data > leftMax) && (root->data <= rightMin));
+	return output; 
 }
 
 int main(){
