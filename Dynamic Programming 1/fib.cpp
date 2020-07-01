@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+//Brute Force
 /*//Normal Function O(2^n)
 int fibo(int n){
     if(n<=1){
@@ -10,7 +11,7 @@ int fibo(int n){
 }
 */
 
-// Dynamic Programming
+// Memoization (Top-Down Approach)
 int fibo_Helper(int n,  int* ans){
     if(n<=1){
         return n;
@@ -36,6 +37,19 @@ int fibo_2(int n){
     int a = fibo_Helper(n,ans);
     delete [] ans;
     return a;
+}
+
+//Iterative
+//Dynamic Programming (Bottom -Up Approach)
+//O(n)
+int fibo_3(int n){
+    int* ans = new int[n+1];
+    ans[0] = 0;
+    ans[1] = 1;
+    for(int i=2;i<= n;i++){
+        ans[i] = ans[i-1]+ans[i-2];
+    }
+    return ans[n];
 }
 
 int main() {
