@@ -3,18 +3,16 @@
 using namespace std;
 
 
-//Recursive BruteForce Solution
+//Recursive BruteForce Solution O(2^n)
 int minStepFn(int n){
-	if(n==1){
+	if(n<=1){
 		return 0;
 	}
 	
-	int x = INT_MAX;
 	int y = INT_MAX;
 	int z = INT_MAX;
-	if(n >1){
-		x = minStepFn(n-1);
-	}
+	int x = minStepFn(n-1);
+	
 	if(n>=3 && n%3==0){
 		y = minStepFn(n/3);
 	}
@@ -30,13 +28,57 @@ int minStepFn(int n){
 		return z+1;
 	}
 }
+
+// Memoization O(n)
+int minStepFn2(int n, int* ans){
+	//Base Case
+	if(n<=1){
+		return 0;
+	}
+	
+	// Check if ans exist
+	if(ans[n] != -1){
+		return ans[n];
+	}
+	
+	//Small Calculation
+	int x = minStepFn2(n-1,ans);
+	int y=INT_MAX, z= INT_MAX;
+	if(n%2==0){
+		y = minStepFn2(n/2,ans);
+	}
+	if(n%3==0){
+		z = minStepFn2(n/3,ans);
+	}
+	int output;
+	if(x<=y && x<=z){
+		output =  x+1;
+	}else if(y<=x && y<= z){
+		output = y+1;
+	}else{
+		output = z+1;
+	}
+	ans[n] = output;
+	return output;
+}
+	 
+
+int minStepFn2(int n){
+	int* ans = new int[n+1];
+	for(int i=0;i<=n;i++){
+		ans[i] = -1;
+	}
+	int output = minStepFn2(n,ans);
+	delete [] ans;
+	return output;
+}
 	
 
 int main() {
 	int n;
 	cout<<"Enter the number of whom we want to calculate the min steps\n";
 	cin>>n;
-	int minStep = minStepFn(n);
+	int minStep = minStepFn2(n);
 	cout<<minStep<<endl;
 	return 0;
 }
