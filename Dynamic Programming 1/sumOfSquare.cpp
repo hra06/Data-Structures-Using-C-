@@ -1,6 +1,5 @@
-// A child is running up a staircase with n steps and can hop either 1 step, 2 steps or 3 steps at a time. Implement a method to count how many possible ways the child
-// can run up to the stairs. You need to return all possible number of ways.
-// Time complexity of your code should be O(n).
+// Given an integer N, find and return the count of minimum numbers, sum of whose squares is equal to N.
+// That is, if N is 4, then we can represent it as : {1^2 + 1^2 + 1^2 + 1^2} and {2^2}. Output will be 1, as 1 is the minimum count of numbers required.
 
 #include <iostream>
 #include<climits>
@@ -88,4 +87,5 @@ int main()
 	int n;
 	cin >> n;
 	cout << solveDP(n)<<endl;
+    return 0;
 }
