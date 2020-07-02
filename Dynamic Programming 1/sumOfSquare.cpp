@@ -1,5 +1,6 @@
-// Given an integer N, find and return the count of minimum numbers, sum of whose squares is equal to N.
-// That is, if N is 4, then we can represent it as : {1^2 + 1^2 + 1^2 + 1^2} and {2^2}. Output will be 1, as 1 is the minimum count of numbers required.
+// A child is running up a staircase with n steps and can hop either 1 step, 2 steps or 3 steps at a time. Implement a method to count how many possible ways the child
+// can run up to the stairs. You need to return all possible number of ways.
+// Time complexity of your code should be O(n).
 
 #include <iostream>
 #include<climits>
@@ -57,9 +58,34 @@ int solveMem(int n){
 	return count;
 }
 
+//Dynamic Programming
+int solveDP(int n){
+	if(n<=0)
+		return 0;
+	if(n==1)
+		return 1;
+	
+	int* ans = new int[n+1];
+	 *(ans +0) = 0;
+	 *(ans+1) =1;
+	 
+	 for(int i=2; i<= n; i++){
+		ans[i] = INT_MAX;
+		for(int j=1; j*j<=i;j++){
+			int a = 1+ ans[i-(j*j)];
+			if(a<ans[i]){
+				ans[i] = a;
+			}
+		} 
+	 }
+	int output = ans[n];
+	delete []  ans;
+	return output;
+}
+
 int main()
 {
 	int n;
 	cin >> n;
-	cout << solveMem(n)<<endl;
+	cout << solveDP(n)<<endl;
 }
